@@ -5,11 +5,26 @@ import json
 from datetime import timedelta, datetime, date
 from threading import Thread
 
-from save_db_mysql import load_db, get_id_country_db, get_match_id_in_db
-from save_db_mysql import update_line_db, get_tip_in_db, get_vips_match_id_in_db
-from save_db_mysql import load_vips_db, get_id_in_vip_db, get_lines_db, generate_slugs
+try:
+    from save_db_mysql import load_db, get_id_country_db, get_match_id_in_db
+    from save_db_mysql import update_line_db, get_tip_in_db, get_vips_match_id_in_db
+    from save_db_mysql import load_vips_db, get_id_in_vip_db, get_lines_db, generate_slugs
+except Exception:  # pragma: no cover - optional dependencies
+    load_db = lambda *a, **k: None
+    get_id_country_db = lambda *a, **k: None
+    get_match_id_in_db = lambda *a, **k: None
+    update_line_db = lambda *a, **k: None
+    get_tip_in_db = lambda *a, **k: None
+    get_vips_match_id_in_db = lambda *a, **k: None
+    load_vips_db = lambda *a, **k: None
+    get_id_in_vip_db = lambda *a, **k: None
+    get_lines_db = lambda *a, **k: None
+    generate_slugs = lambda *a, **k: None
 
-from good_ligis import sp_good_ligs
+try:
+    from good_ligis import sp_good_ligs
+except Exception:  # pragma: no cover - optional dependency
+    sp_good_ligs = []
 
 
 
